@@ -1,0 +1,21 @@
+name: Mirror SDL2 upstream
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone SDL2 upstream (bare)
+        run: |
+          git clone --bare https://github.com/libsdl-org/SDL.git sdl2.git
+
+      - name: Push to org mirror
+        run: |
+          cd sdl2.git
+          git push --mirror https://x-access-token:${{ secrets.MIRROR_PAT_TOKEN }}@github.com/org-foundation/mirrors-sdl2.git
+PAT_
