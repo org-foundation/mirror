@@ -14,7 +14,7 @@ jobs:
         
       - name: Clone SDL2 upstream (bare)
         run: |
-          git clone --mirror https://github.com/libsdl-org/SDL.git sdl2.git
+          git clone --bare https://github.com/libsdl-org/SDL.git sdl2.git
 
       - name: Push to org mirror
         run: |
