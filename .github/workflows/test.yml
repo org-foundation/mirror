@@ -1,4 +1,4 @@
-name: Mirror SDL2 upstream
+name: Mirror SDL2 upstream test
 
 on:
   workflow_dispatch:
