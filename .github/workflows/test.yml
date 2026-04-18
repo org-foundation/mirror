@@ -11,3 +11,9 @@ jobs:
     steps:
       - name: Install GitHub CLI
         run: sudo apt-get install gh
+        
+      - name: Mirror Git repository
+        run: |
+          git clone --mirror https://github.com/libsdl-org/SDL.git sdl2.git
+          cd sdl2.git
+          git push --mirror https://x-access-token:${{ secrets.MIRROR_PAT_TOKEN }}@github.com/org-foundation/mirrors-sdl2.git
