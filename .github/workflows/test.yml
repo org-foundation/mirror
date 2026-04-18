@@ -9,12 +9,20 @@ jobs:
   mirror:
     runs-on: ubuntu-latest
     steps:
-      - name: Install GitHub CLI
-        run: sudo apt-get install gh
-        
       - name: Clone SDL2 upstream (bare)
         run: |
           git clone --bare https://github.com/libsdl-org/SDL.git sdl2.git
+
+      - name: Remove workflows from bare repo
+        run: |
+          cd sdl2.git
+          # 安装 git-filter-repo
+          pip install git-filter-repo
+          # 删除 .github/workflows 目录及其所有历史
+          git filter-repo --path .github/workflows --invert-paths --force
+          
+          # filter-repo 会删除 origin remote，需要重新添加
+          git remote add origin https://github.com/libsdl-org/SDL.git
 
       - name: Push to org mirror
         run: |
