@@ -1,0 +1,13 @@
+name: Mirror SDL2 upstream
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * *"
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install GitHub CLI
+        run: sudo apt-get install gh
